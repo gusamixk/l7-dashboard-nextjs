@@ -1,0 +1,1 @@
+export {CategoryPage as default} from "@/features/table/pages/category/category-page"
