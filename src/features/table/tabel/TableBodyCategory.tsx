@@ -15,12 +15,7 @@ import { Button } from "@/components/ui/button";
 import { DeleteCategoryDialog } from "../components/dialog/categoryDialog";
 export const TableBodyCategory = () => {
 
-    const { data: category, isLoading: isTodoLoading } = useCategories();
-
-    // if (isTodoLoading) {
-    //   return <TodoTableBodySkeleton />;
-    // }
-
+    const { data: category, isLoading: isCategoryLoading } = useCategories();
     return (
 
         <TableBody>
@@ -30,12 +25,13 @@ export const TableBodyCategory = () => {
                     <TableRow key={category.id}>
                         <TableCell className="font-medium">{index + 1}</TableCell>
                         <TableCell>{category.name}</TableCell>
+                        <TableCell>{category.created_at}</TableCell>
+                        <TableCell>{category.updated_at}</TableCell>
                         <TableCell className="text-right flex items-center justify-end gap-3">
                                 <div className="flex justify-center">
                                     <DeleteCategoryDialog categoryId={category.id} />
                                 </div>
                         </TableCell>
-                
                     </TableRow>
                 ),
             })}

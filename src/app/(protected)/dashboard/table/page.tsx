@@ -1,1 +1,1 @@
-export {CategoryPage as default} from "@/features/table/pages/category/category-page"
+export {TablePage as default} from "@/features/table/pages/category/table-page"

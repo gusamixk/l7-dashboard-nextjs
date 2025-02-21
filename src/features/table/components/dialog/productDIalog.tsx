@@ -11,31 +11,31 @@ import {
   } from "@/components/ui/alert-dialog"; 
   import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"; 
   import { Ellipsis, Trash } from "lucide-react"; 
-  import { useCategories } from "../../api/useCategorys";
-  import { useDeleteCategories } from "../../api/useDeleteCategory"
   import { toast } from "sonner"; 
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useProducts } from "../../api/product/useProducts";
+import { useDeleteProduct } from "../../api/product/useDeleteProducts";
 
    
-  type DeleteCategoryDialogProps = { 
-    categoryId: string; 
+  type DeleteProductDialogProps = { 
+    productId: string; 
   }; 
    
-  export const DeleteCategoryDialog = ({ categoryId }: DeleteCategoryDialogProps) => { 
+  export const DeleteProductDialog = ({ productId }: DeleteProductDialogProps) => { 
     const router = useRouter(); 
-    const { refetch: refetchCategories } = useCategories(); 
-    const { mutate: deleteCategory, isPending: isDeleteTodoPending } = useDeleteCategories({
-        id: categoryId,
+    const { refetch: refetchProducts } = useProducts(); 
+    const { mutate: deleteProduct, isPending: isDeleteTodoPending } = useDeleteProduct({
+        id: productId,
         onSuccess: () => {
-          void refetchCategories();
-          toast.success("Deleted category successfully");
+          void refetchProducts();
+          toast.success("Deleted Products successfully");
         },
       }); 
     
-      const handleDeleteCategory = () => { 
-        deleteCategory({id : categoryId}); 
+      const handleDeleteProduct = () => { 
+        deleteProduct({id : productId}); 
       };
 
     return ( 
@@ -50,7 +50,7 @@ import Link from "next/link";
         <DropdownMenuContent>
         <DropdownMenuItem>
           <Button asChild>
-            <Link href={`/dashboard/table/category/${categoryId}/edit`}>Edit</Link>
+            <Link href={`/dashboard/table/category/${productId}/edit`}>Edit</Link>
           </Button>
         </DropdownMenuItem>
           <AlertDialogTrigger asChild>
@@ -70,7 +70,7 @@ import Link from "next/link";
           </AlertDialogHeader> 
           <AlertDialogFooter> 
             <AlertDialogCancel>Cancel</AlertDialogCancel> 
-            <AlertDialogAction onClick={handleDeleteCategory}> 
+            <AlertDialogAction onClick={handleDeleteProduct}> 
               Continue 
             </AlertDialogAction> 
           </AlertDialogFooter> 

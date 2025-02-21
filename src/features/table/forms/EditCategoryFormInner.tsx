@@ -1,27 +1,25 @@
 import { Input } from "@/components/ui/input";
-import { CreateCategoryFormSchemas} from "../types";
+import { UpdateCategoryFormSchema, UpdateCategoryFormSchemas } from "../types";
 import { z } from "zod";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFormContext } from "react-hook-form";
-import { createCategoryFormSchemas } from "../schemas";
+import type {updateCategoryFormSchemas } from "../schemas";
 
-
-type CreateCategoryFormInnerProps = {
+type EditCategoryFormInnerProps = {
   formId: string;
   // onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  onSubmit: (values: CreateCategoryFormSchemas) => void;
-  // handleChangeCategory: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (values: UpdateCategoryFormSchema) => void;
+//   handleChangeTodo: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-
-
-export const CreateCategoryFormInner = ({
+export const EditCategoryFormInner = ({
   formId,
   onSubmit,
-  // handleChangeCategory,
-}: CreateCategoryFormInnerProps) => {
-  const form = useFormContext<CreateCategoryFormSchemas>();
+//   handleChangeTodo,
+
+}: EditCategoryFormInnerProps) => {
+  const form = useFormContext<UpdateCategoryFormSchema>();
   return (
     <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
     <FormField
@@ -29,16 +27,16 @@ export const CreateCategoryFormInner = ({
       name="name"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Category</FormLabel>
+          <FormLabel>Todo</FormLabel>
           <FormControl>
             <Input
               {...field}
-              type="formId"
-              placeholder="Enter your category"
+              type="text"
+              placeholder="Enter your todo"
               // onChange={handleChangeTodo}
             />
           </FormControl>
-          <FormDescription>Create your category</FormDescription>
+          <FormDescription>Create your todo</FormDescription>
           {form.formState.errors.name && (
             <FormMessage>{form.formState.errors.name.message}</FormMessage>
           )}

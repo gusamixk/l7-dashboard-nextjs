@@ -30,6 +30,7 @@ export const CreateCategoryForm = () => {
   const { mutate: createCategory, isPending: isCreateCategoryPending } =
     useCreateCategory({
       onSuccess: () => {
+        void refetchCategories();
         form.reset();
         toast.success("Todo added successfully");
       },
